@@ -1,0 +1,439 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #ffffff;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: 1px solid #4CAF50;
+    position: relative;
+}
+
+.logo-section {
+    flex: 1;
+}
+
+.foundation-name {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.tagline {
+    font-style: italic;
+    color: #cccccc;
+    font-size: 1.1rem;
+}
+
+.header-info {
+    text-align: right;
+    margin-right: 120px;
+}
+
+.header-info p {
+    margin: 5px 0;
+    color: #cccccc;
+}
+
+.download-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.download-btn:hover {
+    background: #45a049;
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Main Grid Layout */
+.main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Card Styles */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4CAF50, #66BB6A);
+    border-radius: 15px 15px 0 0;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #4CAF50;
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.2);
+}
+
+.card h2 {
+    color: #4CAF50;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.card h3 {
+    color: #66BB6A;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.card p {
+    color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+.card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card li {
+    color: #e0e0e0;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.card li::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    font-size: 0.8rem;
+}
+
+/* Specific Card Layouts */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.value-item {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 3px solid #4CAF50;
+}
+
+.programs-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.program-item {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.highlights-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.highlight-item {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #4CAF50;
+}
+
+.leadership-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.leader-item {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.contact-item {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.contact-item h3 {
+    margin-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border-top: 2px solid #4CAF50;
+    color: #cccccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .header-info {
+        text-align: center;
+        margin-right: 0;
+    }
+    
+    .download-btn {
+        position: static;
+        transform: none;
+        margin-top: 15px;
+    }
+    
+    .foundation-name {
+        font-size: 2rem;
+    }
+    
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    .values-grid,
+    .programs-list,
+    .contact-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .leadership-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .foundation-name {
+        font-size: 1.8rem;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+    
+    .card h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Print Styles for PDF Export */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+    
+    body {
+        background: white !important;
+        color: #333333 !important;
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+    
+    .header {
+        background: #f8f9fa !important;
+        border: 2px solid #4CAF50 !important;
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+    }
+    
+    .foundation-name {
+        color: #2E7D32 !important;
+        font-size: 24pt !important;
+    }
+    
+    .tagline {
+        color: #666666 !important;
+        font-size: 12pt !important;
+    }
+    
+    .header-info {
+        color: #333333 !important;
+        margin-right: 0 !important;
+    }
+    
+    .main-grid {
+        display: block;
+        column-count: 2;
+        column-gap: 20px;
+        column-fill: balance;
+    }
+    
+    .card {
+        background: #f8f9fa !important;
+        border: 1px solid #4CAF50 !important;
+        break-inside: avoid;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .card::before {
+        background: #4CAF50 !important;
+    }
+    
+    .card h2 {
+        color: #2E7D32 !important;
+        font-size: 14pt !important;
+        margin-bottom: 10px;
+    }
+    
+    .card h3 {
+        color: #388E3C !important;
+        font-size: 12pt !important;
+        margin-bottom: 6px;
+    }
+    
+    .card p,
+    .card li {
+        color: #333333 !important;
+        font-size: 10pt;
+        margin-bottom: 6px;
+    }
+    
+    .card li::before {
+        color: #4CAF50 !important;
+    }
+    
+    .value-item,
+    .program-item,
+    .highlight-item,
+    .leader-item,
+    .contact-item {
+        background: #f0f4f0 !important;
+        border-color: #4CAF50 !important;
+        margin-bottom: 8px;
+        padding: 10px;
+    }
+    
+    .values-grid,
+    .programs-list,
+    .contact-info,
+    .leadership-content {
+        display: block;
+    }
+    
+    .highlights-content {
+        display: block;
+    }
+    
+    .footer {
+        background: #f8f9fa !important;
+        border-top: 2px solid #4CAF50 !important;
+        color: #333333 !important;
+        margin-top: 20px;
+        page-break-inside: avoid;
+    }
+    
+    /* Ensure proper page breaks */
+    .intro-card,
+    .vision-card,
+    .mission-card {
+        page-break-inside: avoid;
+    }
+    
+    /* Adjust font sizes for better print readability */
+    @page {
+        margin: 0.75in;
+        size: A4;
+    }
+}

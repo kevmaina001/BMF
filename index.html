@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beulah Muthonii Foundation - Breaking the silence, building resilience</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#2196F3',
+                        'primary-dark': '#1976D2',
+                        'primary-light': '#BBDEFB',
+                        'secondary': '#42A5F5',
+                        'accent': '#E3F2FD',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="font-inter bg-white">
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="fixed w-full top-0 z-50 transition-all duration-300" 
+             :class="isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/90 backdrop-blur-sm'">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-14 sm:h-16 lg:h-20">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=40&h=40&fit=crop&crop=center" 
+                             alt="BMF Logo" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover">
+                        <span class="text-lg sm:text-xl font-bold text-primary">BMF</span>
+                    </div>
+
+                    <!-- Desktop Menu -->
+                    <div class="hidden lg:flex items-center space-x-8">
+                        <a href="#home" @click="scrollTo('home')" class="text-gray-700 hover:text-primary transition-colors font-medium">Home</a>
+                        <a href="#about" @click="scrollTo('about')" class="text-gray-700 hover:text-primary transition-colors font-medium">About</a>
+                        <a href="#programs" @click="scrollTo('programs')" class="text-gray-700 hover:text-primary transition-colors font-medium">Programs</a>
+                        <a href="#impact" @click="scrollTo('impact')" class="text-gray-700 hover:text-primary transition-colors font-medium">Impact</a>
+                        <a href="#contact" @click="scrollTo('contact')" class="text-gray-700 hover:text-primary transition-colors font-medium">Contact</a>
+                        <button @click="downloadPDF" class="no-print bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full hover:shadow-lg transition-all duration-300 flex items-center space-x-2 text-sm font-semibold">
+                            <i class="fas fa-download"></i>
+                            <span class="hidden sm:inline">Download PDF</span>
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button @click="toggleMobileMenu" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="w-6 h-6 flex flex-col justify-center items-center space-y-1">
+                            <span class="block w-5 h-0.5 bg-gray-600 transition-all" :class="mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''"></span>
+                            <span class="block w-5 h-0.5 bg-gray-600 transition-all" :class="mobileMenuOpen ? 'opacity-0' : ''"></span>
+                            <span class="block w-5 h-0.5 bg-gray-600 transition-all" :class="mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''"></span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div class="lg:hidden" :class="mobileMenuOpen ? 'block' : 'hidden'">
+                    <div class="px-3 py-3 space-y-2 bg-white border-t border-gray-100 shadow-lg">
+                        <a href="#home" @click="scrollTo('home')" class="block px-4 py-3 text-gray-700 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors text-base active:bg-blue-100">Home</a>
+                        <a href="#about" @click="scrollTo('about')" class="block px-4 py-3 text-gray-700 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors text-base active:bg-blue-100">About</a>
+                        <a href="#programs" @click="scrollTo('programs')" class="block px-4 py-3 text-gray-700 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors text-base active:bg-blue-100">Programs</a>
+                        <a href="#impact" @click="scrollTo('impact')" class="block px-4 py-3 text-gray-700 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors text-base active:bg-blue-100">Impact</a>
+                        <a href="#contact" @click="scrollTo('contact')" class="block px-4 py-3 text-gray-700 hover:text-primary hover:bg-blue-50 rounded-lg font-medium transition-colors text-base active:bg-blue-100">Contact</a>
+                        <div class="pt-3 border-t border-gray-100">
+                            <button @click="downloadPDF" class="no-print w-full bg-gradient-to-r from-primary to-secondary text-white px-4 py-3 rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 font-semibold text-base active:scale-95">
+                                <i class="fas fa-download"></i>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1509909756405-be0199881695?w=1920&h=1080&fit=crop&crop=center" 
+                     alt="African youth empowerment" class="w-full h-full object-cover scale-105">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary-dark/85 to-secondary/80"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 text-center text-white px-6 py-20 w-full max-w-5xl mx-auto">
+                <div class="space-y-6 md:space-y-8">
+                    <!-- Foundation Name - Mobile Optimized -->
+                    <h1 class="font-bold leading-tight">
+                        <span class="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-2 md:mb-4">
+                            Beulah Muthonii Foundation
+                        </span>
+                        <span class="block text-base sm:text-lg md:text-xl lg:text-2xl font-light italic opacity-95 px-2">
+                            Breaking the silence, building resilience
+                        </span>
+                    </h1>
+                    
+                    <!-- Description - Mobile Optimized -->
+                    <p class="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed opacity-95 max-w-2xl mx-auto px-2">
+                        Empowering young people in Murang'a County through mental health awareness, 
+                        education, and community support programs.
+                    </p>
+
+                    <!-- Stats - Mobile Optimized Grid -->
+                    <div class="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 py-6 md:py-8">
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300 mb-1">100+</div>
+                            <div class="text-xs sm:text-sm md:text-base opacity-90">Lives Impacted</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300 mb-1">70+</div>
+                            <div class="text-xs sm:text-sm md:text-base opacity-90">Youth Reached</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300 mb-1">2025</div>
+                            <div class="text-xs sm:text-sm md:text-base opacity-90">Founded</div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons - Mobile Optimized -->
+                    <div class="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center items-center pt-4">
+                        <button @click="scrollTo('about')" 
+                                class="bg-yellow-400 text-primary-dark px-6 py-3 sm:px-8 sm:py-3 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-yellow-300 transition-all duration-300 hover:shadow-lg hover:scale-105 w-full sm:w-auto max-w-xs">
+                            Learn More
+                        </button>
+                        <button @click="scrollTo('contact')" 
+                                class="border-2 border-white text-white px-6 py-3 sm:px-8 sm:py-3 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-white hover:text-primary transition-all duration-300 hover:shadow-lg w-full sm:w-auto max-w-xs">
+                            Get Involved
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator - Hidden on small mobile -->
+            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce hidden sm:block">
+                <div class="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+                    <div class="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary-dark mb-3 sm:mb-4 px-4">About Our Foundation</h2>
+                    <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">Dedicated to transforming lives through holistic empowerment and mental health support</p>
+                </div>
+
+                <!-- About Content -->
+                <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center mb-12 md:mb-16">
+                    <div class="order-2 lg:order-1 px-2">
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-primary-dark mb-4 md:mb-6">Our Story</h3>
+                        <p class="text-sm sm:text-base md:text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed">
+                            We are a Murang'a-based foundation focused on the mental health and holistic empowerment of young people—especially boys—through awareness, support, education, advocacy, and research. We collaborate with communities to discover and nurture talents, promote well-being, and build resilient, self-reliant futures.
+                        </p>
+                        
+                        <div class="space-y-3 md:space-y-4">
+                            <div class="flex items-center space-x-3 md:space-x-4 bg-white p-3 md:p-4 rounded-xl shadow-sm">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-primary text-sm md:text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-dark text-sm md:text-base">Location</h4>
+                                    <p class="text-gray-600 text-sm">Murang'a County, Kenya</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 md:space-x-4 bg-white p-3 md:p-4 rounded-xl shadow-sm">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-calendar text-primary text-sm md:text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-dark text-sm md:text-base">Founded</h4>
+                                    <p class="text-gray-600 text-sm">2025</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 md:space-x-4 bg-white p-3 md:p-4 rounded-xl shadow-sm">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-certificate text-primary text-sm md:text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-dark text-sm md:text-base">Registration</h4>
+                                    <p class="text-gray-600 text-sm">Pending / In progress</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-1 lg:order-2 px-2">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop&crop=center" 
+                                 alt="African community gathering" class="w-full h-48 sm:h-64 md:h-80 object-cover">
+                            <div class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <button @click="showVideo = true" class="w-12 h-12 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fas fa-play text-primary text-lg md:text-xl ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision & Mission -->
+                <div class="grid md:grid-cols-2 gap-8 mb-16">
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-100 to-blue-200 rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-eye text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-primary-dark mb-4">Our Vision</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check text-primary mt-1 text-sm"></i>
+                                <span class="text-sm sm:text-base">A thriving, empowered community where every individual has the opportunity to live with dignity, purpose, and hope.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check text-primary mt-1 text-sm"></i>
+                                <span class="text-sm sm:text-base">To be a catalyst for sustainable transformation in communities, fostering resilience, equity, and opportunity for all.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="w-16 h-16 bg-gradient-to-r from-orange-100 to-orange-200 rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-bullseye text-orange-500 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-primary-dark mb-4">Our Mission</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check text-primary mt-1 text-sm"></i>
+                                <span class="text-sm sm:text-base">To uplift communities through innovative initiatives that promote education, health, empowerment, and sustainable livelihoods.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check text-primary mt-1 text-sm"></i>
+                                <span class="text-sm sm:text-base">To transform lives by investing in people, nurturing talents, and providing opportunities that build strong communities.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Core Values -->
+                <div class="text-center">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-primary-dark mb-8 sm:mb-12">Core Values</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                        <div v-for="(value, index) in values" :key="index" 
+                             class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i :class="value.icon" class="text-white text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-primary-dark mb-3">{{ value.name }}</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">{{ value.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Section -->
+        <section id="programs" class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-accent to-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 sm:mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-dark mb-4">Our Programs</h2>
+                    <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">Comprehensive initiatives designed to create lasting impact in our communities</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <div v-for="(program, index) in programs" :key="index"
+                         :data-aos="'fade-up'" :data-aos-delay="index * 100"
+                         class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group">
+                        <div class="relative h-48 sm:h-56 overflow-hidden">
+                            <img :src="program.image" :alt="program.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent"></div>
+                            <div class="absolute top-4 right-4 w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
+                                <i :class="program.icon" class="text-primary text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-primary-dark mb-3">{{ program.name }}</h3>
+                            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">{{ program.description }}</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span v-for="feature in program.features" :key="feature" 
+                                      class="inline-block bg-accent text-primary text-xs font-medium px-3 py-1 rounded-full">
+                                    {{ feature }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 sm:mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-dark mb-4">Our Impact</h2>
+                    <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">Measuring success through lives transformed and communities strengthened</p>
+                </div>
+                
+                <!-- Highlights -->
+                <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                    <!-- Main Highlight -->
+                    <div data-aos="fade-right" class="lg:col-span-2 bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <div class="md:flex">
+                            <div class="md:w-1/2">
+                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&crop=center" 
+                                     alt="African workshop participants" class="w-full h-64 md:h-full object-cover">
+                            </div>
+                            <div class="md:w-1/2 p-6 sm:p-8 flex flex-col justify-center">
+                                <span class="inline-block bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold mb-4 w-fit">June 2025</span>
+                                <h3 class="text-xl sm:text-2xl font-bold text-primary-dark mb-4">Pilot Mental Health Workshop</h3>
+                                <p class="text-gray-600 mb-6 text-sm sm:text-base">Successfully hosted our first mental-health awareness and mentorship session, creating a safe space for young people to share and learn.</p>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-center">
+                                        <div class="text-2xl sm:text-3xl font-bold text-primary">70+</div>
+                                        <div class="text-gray-600 text-xs sm:text-sm">Youth Participated</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl sm:text-3xl font-bold text-primary">100%</div>
+                                        <div class="text-gray-600 text-xs sm:text-sm">Positive Feedback</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Side Cards -->
+                    <div class="space-y-6">
+                        <div data-aos="fade-up" data-aos-delay="200" class="bg-white p-6 rounded-2xl shadow-lg text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-orange-100 to-orange-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-handshake text-orange-500 text-2xl"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-primary-dark mb-2">Strategic Partners</h4>
+                            <p class="text-gray-600 text-sm">Local churches, schools, CBOs, and Mothers' Union Hall collaboration</p>
+                        </div>
+                        
+                        <div data-aos="fade-up" data-aos-delay="400" class="bg-white p-6 rounded-2xl shadow-lg text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-users text-primary text-2xl"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-primary-dark mb-2">100+ Beneficiaries</h4>
+                            <p class="text-gray-600 text-sm">Direct impact on community members through our programs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Future Plans Timeline -->
+                <div data-aos="fade-up" class="text-center">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-primary-dark mb-8 sm:mb-12">Future Plans (2025-2027)</h3>
+                    <div class="max-w-4xl mx-auto">
+                        <div class="space-y-8">
+                            <div v-for="(plan, index) in futurePlans" :key="index"
+                                 :data-aos="'fade-left'" :data-aos-delay="index * 100"
+                                 class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 bg-white p-6 rounded-xl shadow-lg">
+                                <div class="flex-shrink-0 w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold text-sm">{{ index + 1 }}</span>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <div class="inline-block bg-accent text-primary px-3 py-1 rounded-full text-sm font-semibold mb-2">{{ plan.period }}</div>
+                                    <h4 class="text-lg font-bold text-primary-dark mb-2">{{ plan.title }}</h4>
+                                    <p class="text-gray-600 text-sm sm:text-base">{{ plan.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Section -->
+        <section class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-accent to-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 sm:mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-dark mb-4">Our Leadership</h2>
+                    <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">Dedicated individuals driving positive change in our communities</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
+                    <div data-aos="zoom-in" data-aos-delay="100" class="bg-white rounded-2xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow group">
+                        <div class="relative w-32 h-32 mx-auto mb-6">
+                            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop&crop=face" 
+                                 alt="Beulah Muthonii" class="w-full h-full rounded-full object-cover border-4 border-accent">
+                            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <a href="#" class="w-8 h-8 bg-primary rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fab fa-linkedin text-white text-sm"></i>
+                                </a>
+                                <a href="#" class="w-8 h-8 bg-primary rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fab fa-twitter text-white text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary-dark mb-2">Beulah Muthonii</h3>
+                        <p class="text-primary font-semibold mb-4">Founder & Director</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">Visionary leader committed to empowering youth through mental health advocacy and community development.</p>
+                    </div>
+
+                    <div data-aos="zoom-in" data-aos-delay="200" class="bg-white rounded-2xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow group">
+                        <div class="relative w-32 h-32 mx-auto mb-6">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" 
+                                 alt="Program Lead" class="w-full h-full rounded-full object-cover border-4 border-accent">
+                            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <a href="#" class="w-8 h-8 bg-primary rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fab fa-linkedin text-white text-sm"></i>
+                                </a>
+                                <a href="#" class="w-8 h-8 bg-primary rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fas fa-envelope text-white text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary-dark mb-2">Program Lead</h3>
+                        <p class="text-primary font-semibold mb-4">Head of Programs</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">Experienced program manager overseeing implementation of our mental health and community empowerment initiatives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 sm:mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-dark mb-4">Get In Touch</h2>
+                    <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">Ready to make a difference? Connect with us and join our mission</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+                    <!-- Contact Info -->
+                    <div data-aos="fade-right">
+                        <h3 class="text-2xl font-bold text-primary-dark mb-8">Contact Information</h3>
+                        <div class="space-y-6 mb-8">
+                            <div class="flex items-center space-x-4 bg-white p-4 sm:p-6 rounded-xl shadow-sm">
+                                <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-dark mb-1">Phone</h4>
+                                    <p class="text-gray-600 text-sm">+254 748 292982</p>
+                                    <p class="text-gray-600 text-sm">+254 793 381731</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4 bg-white p-4 sm:p-6 rounded-xl shadow-sm">
+                                <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-dark mb-1">Email</h4>
+                                    <p class="text-gray-600 text-sm">bmfoundation25@gmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4 bg-white p-4 sm:p-6 rounded-xl shadow-sm">
+                                <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-dark mb-1">Address</h4>
+                                    <p class="text-gray-600 text-sm">Mothers' Union Hall</p>
+                                    <p class="text-gray-600 text-sm">Murang'a, Kenya</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media -->
+                        <div>
+                            <h4 class="font-semibold text-primary-dark mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fab fa-facebook-f text-white"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fab fa-twitter text-white"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fab fa-instagram text-white"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fab fa-linkedin-in text-white"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div data-aos="fade-left" class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <div class="relative h-80 sm:h-96">
+                            <img src="https://images.unsplash.com/photo-1484318571209-661cf29a69ea?w=600&h=400&fit=crop&crop=center" 
+                                 alt="Kenyan landscape - Murang'a location" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-primary/60 flex flex-col items-center justify-center text-white">
+                                <i class="fas fa-map-marker-alt text-4xl mb-4"></i>
+                                <p class="text-lg font-semibold">Murang'a County, Kenya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-primary-dark text-white py-12 sm:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-8 mb-8">
+                    <!-- Logo & Description -->
+                    <div class="md:col-span-2">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=50&h=50&fit=crop&crop=center" 
+                                 alt="BMF Logo" class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h3 class="text-xl font-bold">Beulah Muthonii Foundation</h3>
+                                <p class="text-gray-300 text-sm italic">Breaking the silence, building resilience</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-yellow-400">Quick Links</h4>
+                        <div class="space-y-2">
+                            <a href="#about" class="block text-gray-300 hover:text-white transition-colors text-sm">About Us</a>
+                            <a href="#programs" class="block text-gray-300 hover:text-white transition-colors text-sm">Programs</a>
+                            <a href="#impact" class="block text-gray-300 hover:text-white transition-colors text-sm">Impact</a>
+                            <a href="#contact" class="block text-gray-300 hover:text-white transition-colors text-sm">Contact</a>
+                        </div>
+                    </div>
+
+                    <!-- Get Involved -->
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-yellow-400">Get Involved</h4>
+                        <div class="space-y-2">
+                            <a href="#contact" class="block text-gray-300 hover:text-white transition-colors text-sm">Volunteer</a>
+                            <a href="#contact" class="block text-gray-300 hover:text-white transition-colors text-sm">Donate</a>
+                            <a href="#contact" class="block text-gray-300 hover:text-white transition-colors text-sm">Partner with Us</a>
+                            <a href="#contact" class="block text-gray-300 hover:text-white transition-colors text-sm">Newsletter</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-600 pt-8 text-center">
+                    <p class="text-gray-300 text-sm mb-2">&copy; 2025 Beulah Muthonii Foundation. All rights reserved.</p>
+                    <p class="text-gray-400 text-xs">Registration Number: Pending | Founded in 2025</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Video Modal -->
+        <div v-if="showVideo" @click="showVideo = false" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+            <div @click.stop class="relative w-full max-w-4xl">
+                <button @click="showVideo = false" class="absolute -top-12 right-0 text-white hover:text-gray-300 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="relative h-0 pb-[56.25%] bg-black rounded-lg overflow-hidden">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            class="absolute inset-0 w-full h-full" 
+                            frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button v-show="isScrolled" @click="scrollToTop" 
+                class="fixed bottom-6 right-6 w-12 h-12 bg-primary hover:bg-primary-dark rounded-full shadow-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110 z-40">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

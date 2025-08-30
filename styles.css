@@ -1,0 +1,172 @@
+/* Print Styles for PDF Export */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #000 !important;
+        background: white !important;
+    }
+    
+    * {
+        background: transparent !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    .bg-gradient-to-r,
+    .bg-gradient-to-br,
+    .bg-primary,
+    .bg-primary-dark {
+        background: #2196F3 !important;
+        color: white !important;
+    }
+    
+    .text-primary,
+    .text-primary-dark {
+        color: #1976D2 !important;
+    }
+    
+    .text-white {
+        color: #333 !important;
+    }
+    
+    .shadow-lg,
+    .shadow-xl,
+    .shadow-2xl {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .rounded-2xl,
+    .rounded-xl,
+    .rounded-full {
+        border-radius: 8px !important;
+    }
+    
+    section {
+        page-break-inside: avoid;
+        margin-bottom: 20px !important;
+        padding: 15px 0 !important;
+    }
+    
+    .hero {
+        height: auto !important;
+        min-height: auto !important;
+        padding: 30px 0 !important;
+    }
+    
+    .grid {
+        display: block !important;
+    }
+    
+    .grid > * {
+        margin-bottom: 15px;
+        page-break-inside: avoid;
+    }
+    
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    @page {
+        margin: 0.75in;
+        size: A4;
+    }
+    
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+    
+    .fixed {
+        position: static !important;
+    }
+}
+
+/* Custom animations that work well with Tailwind */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Mobile-first responsive optimizations */
+@media (max-width: 640px) {
+    /* Navigation optimizations */
+    .nav-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Hero section mobile optimization */
+    .hero {
+        padding-top: 60px;
+        min-height: 100vh;
+        height: auto;
+    }
+    
+    .hero h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero p {
+        font-size: 0.9rem !important;
+        padding: 0 0.5rem;
+    }
+    
+    /* Section optimizations */
+    .section-title {
+        font-size: 1.75rem !important;
+    }
+    
+    .card-title {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Content spacing */
+    section {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    /* Button optimizations */
+    .mobile-btn {
+        min-height: 44px;
+        font-size: 0.9rem;
+    }
+    
+    /* Image optimizations */
+    .mobile-img {
+        height: 200px !important;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 375px) {
+    .hero h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    .hero p {
+        font-size: 0.85rem !important;
+    }
+    
+    /* Tighter spacing for very small screens */
+    .px-6 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
