@@ -35,46 +35,46 @@ createApp({
             ],
             programs: [
                 {
-                    name: 'Mental Health Awareness',
-                    description: 'Educating communities about unique mental health challenges facing young people, especially boys, and breaking stigma around seeking help.',
-                    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center',
-                    icon: 'fas fa-brain',
-                    features: ['Workshops', 'Community Sessions', 'Awareness Campaigns']
+                    name: 'Health & Hygiene Campaigns',
+                    description: 'Implementing targeted health campaigns including menstrual hygiene awareness and jigger eradication programs to improve community health outcomes.',
+                    image: 'images/Menstrual hygiene campaign.jpg',
+                    icon: 'fas fa-heart',
+                    features: ['Menstrual Hygiene', 'Jigger Treatment', 'Health Education']
                 },
                 {
-                    name: 'Peer Support Networks',
-                    description: 'Creating safe spaces for young people to connect, share experiences, and support each other through peer counseling and group activities.',
-                    image: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=400&h=300&fit=crop&crop=center',
+                    name: 'Peer Support & Mentorship',
+                    description: 'Creating safe spaces for young people to connect, share experiences, and support each other through structured mentorship and peer counseling programs.',
+                    image: 'images/Mentorship.jpg',
                     icon: 'fas fa-people-group',
-                    features: ['Peer Counseling', 'Support Groups', 'Mentorship']
+                    features: ['Peer Counseling', 'Support Groups', 'Youth Mentorship']
                 },
                 {
-                    name: 'Education & Training',
-                    description: 'Providing comprehensive workshops and school programs that equip young people with life skills, emotional intelligence, and coping strategies.',
-                    image: 'https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=400&h=300&fit=crop&crop=center',
+                    name: 'Education & School Support',
+                    description: 'Supporting educational initiatives through milk donation programs and school partnerships that ensure students have proper nutrition for learning.',
+                    image: 'images/Milk donation in schools.jpg',
                     icon: 'fas fa-graduation-cap',
-                    features: ['Life Skills', 'Emotional Intelligence', 'Coping Strategies']
+                    features: ['School Nutrition', 'Educational Support', 'Student Welfare']
                 },
                 {
-                    name: 'Community Advocacy',
-                    description: 'Collaborating with local organizations, schools, and healthcare providers to improve mental health services and create supportive environments.',
-                    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop&crop=center',
-                    icon: 'fas fa-bullhorn',
-                    features: ['Policy Advocacy', 'Community Partnerships', 'Service Improvement']
+                    name: 'Community Health Initiatives',
+                    description: 'Implementing comprehensive community health programs including jigger eradication campaigns to improve overall community wellbeing.',
+                    image: 'images/Jigger campaign.jpg',
+                    icon: 'fas fa-hands-helping',
+                    features: ['Disease Prevention', 'Community Outreach', 'Health Awareness']
                 },
                 {
-                    name: 'Research & Innovation',
-                    description: 'Conducting research to understand local mental health needs and developing evidence-based practices and policies for better outcomes.',
-                    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop&crop=center',
-                    icon: 'fas fa-microscope',
-                    features: ['Community Research', 'Data Analysis', 'Policy Development']
+                    name: 'Youth Development Programs',
+                    description: 'Comprehensive youth development through various activities including sports, mentorship, and skills training to build confident, capable young people.',
+                    image: 'images/The Team.jpg',
+                    icon: 'fas fa-users',
+                    features: ['Skills Training', 'Personal Development', 'Leadership Building']
                 },
                 {
-                    name: 'Talent Development',
-                    description: 'Discovering and nurturing talents in young people through creative programs, sports, and skills development initiatives.',
-                    image: 'https://images.unsplash.com/photo-1509909756405-be0199881695?w=400&h=300&fit=crop&crop=center',
-                    icon: 'fas fa-star',
-                    features: ['Creative Arts', 'Sports Programs', 'Skills Development']
+                    name: 'Sports & Recreation',
+                    description: 'Promoting physical and mental wellness through sports programs, including football support initiatives that build teamwork and community spirit.',
+                    image: 'images/Football support.jpg',
+                    icon: 'fas fa-futbol',
+                    features: ['Sports Programs', 'Team Building', 'Physical Wellness']
                 }
             ],
             futurePlans: [
