@@ -6,6 +6,42 @@ createApp({
             isScrolled: false,
             mobileMenuOpen: false,
             showVideo: false,
+            currentSlide: 0,
+            sliderInterval: null,
+            progressInterval: null,
+            sliderProgress: 0,
+            heroSlides: [
+                {
+                    image: 'images/Mentorship.jpg',
+                    alt: 'BMF Mentorship Program - Youth development and guidance',
+                    title: 'Mentorship & Guidance',
+                    subtitle: 'Empowering youth through structured mentorship programs'
+                },
+                {
+                    image: 'images/Jigger campaign.jpg',
+                    alt: 'BMF Community Health Campaign - Jigger eradication program',
+                    title: 'Health & Wellness',
+                    subtitle: 'Improving community health through targeted campaigns'
+                },
+                {
+                    image: 'images/Milk donation in schools.jpg',
+                    alt: 'BMF School Support - Educational nutrition program',
+                    title: 'Education Support',
+                    subtitle: 'Ensuring proper nutrition for enhanced learning'
+                },
+                {
+                    image: 'images/The Team.jpg',
+                    alt: 'BMF Team - Dedicated foundation members working together',
+                    title: 'Team & Community',
+                    subtitle: 'Building resilient communities together'
+                },
+                {
+                    image: 'images/Football support.jpg',
+                    alt: 'BMF Sports Program - Youth football and recreation activities',
+                    title: 'Sports & Recreation',
+                    subtitle: 'Promoting physical wellness and teamwork'
+                }
+            ],
             values: [
                 {
                     name: 'Empathy',
@@ -195,6 +231,15 @@ createApp({
         
         // Counter animation for stats
         this.animateCounters();
+        
+        // Initialize hero slider
+        this.initHeroSlider();
+        
+        // Add keyboard navigation
+        this.initKeyboardNavigation();
+        
+        // Add touch support for mobile
+        this.initTouchNavigation();
     },
     methods: {
         handleScroll() {
@@ -425,6 +470,153 @@ createApp({
         initInteractions() {
             // Tailwind handles hover effects via utility classes
             // This method is kept for custom JavaScript interactions
+        },
+        
+        // Hero Slider functionality
+        initHeroSlider() {
+            this.startSliderWithProgress();
+            
+            // Pause slider on hover
+            const heroSection = document.querySelector('#home');
+            if (heroSection) {
+                heroSection.addEventListener('mouseenter', () => {
+                    this.pauseSlider();
+                });
+                
+                heroSection.addEventListener('mouseleave', () => {
+                    this.startSliderWithProgress();
+                });
+            }
+        },
+        
+        // Start slider with progress tracking
+        startSliderWithProgress() {
+            this.sliderProgress = 0;
+            
+            // Auto-advance slider every 5 seconds
+            this.sliderInterval = setInterval(() => {
+                this.nextSlide();
+                this.sliderProgress = 0;
+            }, 5000);
+            
+            // Update progress bar every 50ms
+            this.progressInterval = setInterval(() => {
+                this.sliderProgress += 1; // 1% every 50ms = 100% in 5 seconds
+                if (this.sliderProgress >= 100) {
+                    this.sliderProgress = 0;
+                }
+            }, 50);
+        },
+        
+        // Pause slider and progress
+        pauseSlider() {
+            if (this.sliderInterval) {
+                clearInterval(this.sliderInterval);
+                this.sliderInterval = null;
+            }
+            if (this.progressInterval) {
+                clearInterval(this.progressInterval);
+                this.progressInterval = null;
+            }
+        },
+        
+        nextSlide() {
+            this.currentSlide = (this.currentSlide + 1) % this.heroSlides.length;
+            this.resetProgress();
+        },
+        
+        prevSlide() {
+            this.currentSlide = this.currentSlide === 0 ? this.heroSlides.length - 1 : this.currentSlide - 1;
+            this.resetProgress();
+        },
+        
+        goToSlide(index) {
+            this.currentSlide = index;
+            this.resetProgress();
+        },
+        
+        // Reset progress when manually navigating
+        resetProgress() {
+            this.sliderProgress = 0;
+        },
+        
+        // Keyboard navigation for slider
+        initKeyboardNavigation() {
+            document.addEventListener('keydown', (e) => {
+                // Only handle keys when hero section is visible
+                const heroSection = document.querySelector('#home');
+                if (heroSection && this.isElementInViewport(heroSection)) {
+                    switch(e.key) {
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            this.prevSlide();
+                            break;
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            this.nextSlide();
+                            break;
+                        case ' ': // Spacebar to pause/play
+                            e.preventDefault();
+                            this.toggleSlider();
+                            break;
+                    }
+                }
+            });
+        },
+        
+        // Check if element is in viewport
+        isElementInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom > 0;
+        },
+        
+        // Toggle slider auto-advance
+        toggleSlider() {
+            if (this.sliderInterval) {
+                this.pauseSlider();
+            } else {
+                this.startSliderWithProgress();
+            }
+        },
+        
+        // Touch navigation for mobile devices
+        initTouchNavigation() {
+            const sliderContainer = document.querySelector('#home .relative.w-full.h-full');
+            if (!sliderContainer) return;
+            
+            let startX = 0;
+            let startY = 0;
+            let threshold = 50; // Minimum swipe distance
+            
+            sliderContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+            
+            sliderContainer.addEventListener('touchend', (e) => {
+                if (!startX || !startY) return;
+                
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                
+                const diffX = startX - endX;
+                const diffY = startY - endY;
+                
+                // Check if horizontal swipe is more prominent than vertical
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
+                    if (diffX > 0) {
+                        // Swipe left - next slide
+                        this.nextSlide();
+                    } else {
+                        // Swipe right - previous slide
+                        this.prevSlide();
+                    }
+                }
+                
+                // Reset values
+                startX = 0;
+                startY = 0;
+            }, { passive: true });
         }
     },
     
@@ -438,5 +630,11 @@ createApp({
     // Cleanup on component destroy
     beforeUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
+        if (this.sliderInterval) {
+            clearInterval(this.sliderInterval);
+        }
+        if (this.progressInterval) {
+            clearInterval(this.progressInterval);
+        }
     }
 }).mount('#app');
