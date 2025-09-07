@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beulah Muthoni Foundation - Professional Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+            font-size: 12pt;
+        }
+
+        .document-container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+            background: white;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2196F3;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            object-fit: cover;
+            border: 3px solid #2196F3;
+        }
+
+        .foundation-name {
+            font-size: 24pt;
+            color: #1976D2;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            font-size: 14pt;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 10pt;
+            color: #555;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 16pt;
+            color: #1976D2;
+            font-weight: bold;
+            margin-bottom: 12px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #BBDEFB;
+        }
+
+        .subsection-title {
+            font-size: 14pt;
+            color: #1976D2;
+            font-weight: 600;
+            margin: 15px 0 8px;
+        }
+
+        .content {
+            font-size: 11pt;
+            line-height: 1.5;
+            text-align: justify;
+            margin-bottom: 12px;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        /* Lists */
+        ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            font-size: 11pt;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: #f8f9fa;
+            border-left: 4px solid #2196F3;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-card h4 {
+            color: #1976D2;
+            font-size: 12pt;
+            margin-bottom: 5px;
+        }
+
+        .info-card p {
+            font-size: 10pt;
+            margin: 3px 0;
+        }
+
+        /* Programs Grid */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .program-card {
+            background: #f0f7ff;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #BBDEFB;
+        }
+
+        .program-card h4 {
+            color: #1976D2;
+            font-size: 11pt;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .program-card p {
+            font-size: 10pt;
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .feature-tag {
+            background: #2196F3;
+            color: white;
+            padding: 2px 6px;
+            font-size: 8pt;
+            border-radius: 10px;
+        }
+
+        /* Statistics */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 20pt;
+            font-weight: bold;
+            color: #1976D2;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 9pt;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 10px;
+            background: #f0f7ff;
+            border-radius: 8px;
+        }
+
+        .contact-item h4 {
+            color: #1976D2;
+            font-size: 11pt;
+            margin-bottom: 5px;
+        }
+
+        .contact-item p {
+            font-size: 10pt;
+            margin: 2px 0;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #2196F3;
+            text-align: center;
+            font-size: 9pt;
+            color: #666;
+        }
+
+        /* Print Specific */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .document-container {
+                padding: 0.5in;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            @page {
+                margin: 0.75in;
+                size: A4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <!-- Header -->
+        <div class="header">
+            <img src="images/CEO.jpg" alt="BMF Logo" class="logo">
+            <h1 class="foundation-name">Beulah Muthoni Foundation</h1>
+            <p class="tagline">Breaking the silence, building resilience</p>
+            <div class="header-info">
+                <span><strong>Location:</strong> Murang'a County, Kenya</span>
+                <span><strong>Founded:</strong> 2025</span>
+                <span><strong>Registration:</strong> Registered</span>
+            </div>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="section">
+            <h2 class="section-title">Executive Summary</h2>
+            <p class="content">
+                The Beulah Muthonii Foundation (BMF) is a Murang'a-based foundation focused on the mental health and holistic empowerment of young people—especially boys—through awareness, support, education, advocacy, and research. We collaborate with communities to discover and nurture talents, promote well-being, and build resilient, self-reliant futures.
+            </p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Lives Transformed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">70+</span>
+                    <span class="stat-label">Youth Empowered</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Active Programs</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vision & Mission -->
+        <div class="section">
+            <h2 class="section-title">Vision & Mission</h2>
+            <div class="two-column">
+                <div class="column">
+                    <div class="info-card">
+                        <h4>Our Vision</h4>
+                        <p>A thriving, empowered community where every individual has the opportunity to live with dignity, purpose, and hope.</p>
+                        <p>To be a catalyst for sustainable transformation in communities, fostering resilience, equity, and opportunity for all.</p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="info-card">
+                        <h4>Our Mission</h4>
+                        <p>To uplift communities through innovative initiatives that promote education, health, empowerment, and sustainable livelihoods.</p>
+                        <p>To transform lives by investing in people, nurturing talents, and providing opportunities that build strong communities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Values -->
+        <div class="section">
+            <h2 class="section-title">Core Values</h2>
+            <ul>
+                <li><strong>Empathy:</strong> Supporting the emotional well-being of every boy child.</li>
+                <li><strong>Inclusivity:</strong> Providing equal access to mental health services.</li>
+                <li><strong>Integrity:</strong> Upholding transparency, accountability, and ethics.</li>
+                <li><strong>Empowerment:</strong> Building confidence and self-reliance.</li>
+                <li><strong>Collaboration:</strong> Partnering with communities for greater impact.</li>
+            </ul>
+        </div>
+
+        <!-- Programs & Services -->
+        <div class="section">
+            <h2 class="section-title">Programs & Services</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h4>Health & Hygiene Campaigns</h4>
+                    <p>Implementing targeted health campaigns including menstrual hygiene awareness and jigger eradication programs to improve community health outcomes.</p>
+                    <div class="features">
+                        <span class="feature-tag">Menstrual Hygiene</span>
+                        <span class="feature-tag">Jigger Treatment</span>
+                        <span class="feature-tag">Health Education</span>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h4>Peer Support & Mentorship</h4>
+                    <p>Creating safe spaces for young people to connect, share experiences, and support each other through structured mentorship and peer counseling programs.</p>
+                    <div class="features">
+                        <span class="feature-tag">Peer Counseling</span>
+                        <span class="feature-tag">Support Groups</span>
+                        <span class="feature-tag">Youth Mentorship</span>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h4>Education & School Support</h4>
+                    <p>Supporting educational initiatives through milk donation programs and school partnerships that ensure students have proper nutrition for learning.</p>
+                    <div class="features">
+                        <span class="feature-tag">School Nutrition</span>
+                        <span class="feature-tag">Educational Support</span>
+                        <span class="feature-tag">Student Welfare</span>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h4>Community Health Initiatives</h4>
+                    <p>Implementing comprehensive community health programs including jigger eradication campaigns to improve overall community wellbeing.</p>
+                    <div class="features">
+                        <span class="feature-tag">Disease Prevention</span>
+                        <span class="feature-tag">Community Outreach</span>
+                        <span class="feature-tag">Health Awareness</span>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h4>Youth Development Programs</h4>
+                    <p>Comprehensive youth development through various activities including sports, mentorship, and skills training to build confident, capable young people.</p>
+                    <div class="features">
+                        <span class="feature-tag">Skills Training</span>
+                        <span class="feature-tag">Personal Development</span>
+                        <span class="feature-tag">Leadership Building</span>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h4>Sports & Recreation</h4>
+                    <p>Promoting physical and mental wellness through sports programs, including football support initiatives that build teamwork and community spirit.</p>
+                    <div class="features">
+                        <span class="feature-tag">Sports Programs</span>
+                        <span class="feature-tag">Team Building</span>
+                        <span class="feature-tag">Physical Wellness</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Impact -->
+        <div class="section">
+            <h2 class="section-title">Recent Impact</h2>
+            <h3 class="subsection-title">Community Jigger Campaign - June 2025</h3>
+            <p class="content">
+                Successfully launched our community health initiative focusing on jigger eradication and prevention, improving health outcomes for vulnerable populations. This campaign achieved a 95% recovery rate among the 50+ individuals treated, demonstrating our commitment to community health and well-being.
+            </p>
+            
+            <h3 class="subsection-title">Strategic Partnerships</h3>
+            <p class="content">
+                BMF has established strong collaborative relationships with local churches, schools, Community-Based Organizations (CBOs), and utilizes the Mothers' Union Hall as our primary meeting and event space. These partnerships enable us to reach more community members and amplify our impact.
+            </p>
+        </div>
+
+        <!-- Future Plans -->
+        <div class="section">
+            <h2 class="section-title">Future Plans (2025-2027)</h2>
+            <ul>
+                <li><strong>Q4 2025 - Quarterly Showcase Events:</strong> Launch regular quarterly events to showcase youth talents and celebrate achievements in the community.</li>
+                <li><strong>2025-2026 - Strategic Partnerships:</strong> Expand partnerships with schools, churches, and CBOs to reach more young people across Murang'a County.</li>
+                <li><strong>2026 - Scholarship Fund Launch:</strong> Establish a scholarship fund to support promising youth in their educational and professional development.</li>
+                <li><strong>2026-2027 - Impact Measurement:</strong> Implement comprehensive monitoring and evaluation framework to measure and improve program impact.</li>
+            </ul>
+        </div>
+
+        <!-- Leadership -->
+        <div class="section">
+            <h2 class="section-title">Leadership</h2>
+            <div class="info-card">
+                <h4>Beulah Muthonii - Founder & Director</h4>
+                <p>Visionary leader committed to empowering youth through mental health advocacy and community development. Under her leadership, BMF has grown from a vision to an active foundation making real impact in Murang'a County communities.</p>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="section">
+            <h2 class="section-title">Contact Information</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h4>Phone</h4>
+                    <p>+254 748 292982</p>
+                    <p>+254 793 381731</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Email</h4>
+                    <p>bmfoundation25@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Address</h4>
+                    <p>Mothers' Union Hall</p>
+                    <p>Murang'a, Kenya</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 Beulah Muthonii Foundation. All rights reserved.</p>
+            <p>Registration Number: Pending | Founded in 2025</p>
+            <p>Breaking the silence, building resilience</p>
+        </div>
+    </div>
+</body>
+</html>

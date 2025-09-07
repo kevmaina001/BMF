@@ -264,12 +264,16 @@ createApp({
         },
         
         downloadPDF() {
-            // Hide navigation and buttons for printing
-            const navbar = document.querySelector('.navbar');
-            const downloadBtns = document.querySelectorAll('.no-print');
+            // Close mobile menu if open
+            this.mobileMenuOpen = false;
             
-            // Trigger browser print dialog
-            window.print();
+            // Use the professional PDF generator
+            if (typeof pdfGenerator !== 'undefined') {
+                pdfGenerator.generatePDF();
+            } else {
+                // Fallback: open the PDF version in a new tab
+                window.open('BMF-Foundation-Profile.html', '_blank');
+            }
         },
         
         initLazyLoading() {
